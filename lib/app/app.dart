@@ -65,12 +65,54 @@ class MyMainPage extends StatelessWidget {
               child: Stack(
                 children: [
                   const ArViewWidget(),
-                  SizedBox(
-                    child: GestureDetector(
-                      child: const Icon(Icons.search, size: 48.0,),
-                      onTap: (){print("icon was tapped");},
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Center(
+                          child: SizedBox.fromSize(
+                            size: const Size(128, 128,),
+                            child: const FlutterLogo(),
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox.fromSize(
+                            size: const Size(128, 128,),
+                            child: const FlutterLogo(),
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox.fromSize(
+                            size: const Size(128, 128,),
+                            child: const FlutterLogo(),
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox.fromSize(
+                            size: const Size(128, 128,),
+                            child: const FlutterLogo(),
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox.fromSize(
+                            size: const Size(128, 128,),
+                            child: const FlutterLogo(),
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox.fromSize(
+                            size: const Size(128, 128,),
+                            child: const FlutterLogo(),
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox.fromSize(
+                            size: const Size(128, 128,),
+                            child: const FlutterLogo(),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
