@@ -14,7 +14,7 @@ class AppRoot{
   AppRoot.init(){
     HttpOverrides.global = MyHttpOverrides();
     WidgetsFlutterBinding.ensureInitialized();
-    setUpServiceLocator();
+    setupLocator();
     runApp(_myApp,);
   }
 }

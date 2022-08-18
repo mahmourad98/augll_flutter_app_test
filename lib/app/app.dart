@@ -1,32 +1,32 @@
 import 'package:augll_project/app/service_locator.dart';
-import 'package:augll_project/providers/compatibility_provider.dart';
-import 'package:augll_project/screens/my_architect_widget.dart';
-import 'package:augll_project/services/navigator_service.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked_services/stacked_services.dart';
+
+import 'app_router.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key,}) : super(key: key,);
 
   @override
   Widget build(BuildContext context,) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<CompatibilityProvider>(
-          create: (_,) => CompatibilityProvider(),
-          lazy: false,
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(),
-        home: Builder(
-          builder: (BuildContext buildContext,){
-            return const MyMainPage();
-          },
-        ),
-        navigatorKey: getItInstance.get<NavigationService>().navigatorKey,
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(),
+      home: Builder(
+        builder: (BuildContext buildContext,){
+          return const MyMainPage();
+        },
       ),
+      navigatorObservers: [
+        StackedService.routeObserver,
+        BotToastNavigatorObserver()
+      ],
+      onGenerateRoute: StackedRouter().onGenerateRoute,
+      navigatorKey: StackedService.navigatorKey,
+      debugShowCheckedModeBanner: false,
+      useInheritedMediaQuery: true,
     );
   }
 }
@@ -47,31 +47,16 @@ class MyMainPage extends StatelessWidget {
             Center(
               child: TextButton(
                 onPressed: (){
-                  Navigator.of(context,).push(
-                    MaterialPageRoute(builder: (_) => const ArViewWidget(),),
-                  );
+                  locator<NavigationService>().clearStackAndShow(Routes.introView,);
                 },
-                child: const Text('Navigate To',
-                    style: TextStyle(
-                      color: Colors.black,
-                    )
+                child: const Text('Navigate To Ar View',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.blue,
                 ),
-              ),
-            ),
-            Expanded(
-              child: Stack(
-                children: [
-                  const ArViewWidget(),
-                  SizedBox(
-                    child: GestureDetector(
-                      child: const Icon(Icons.search, size: 48.0,),
-                      onTap: (){print("icon was tapped");},
-                    ),
-                  ),
-                ],
               ),
             ),
           ],
